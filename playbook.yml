@@ -12,7 +12,20 @@
   #       - nodejs
   #       - npm
   #     update_cache: yes
-  - name: file configuration copy
-    copy: 
-      src: conf/
-      dest: / 
+  # - name: file configuration copy
+  #   copy: 
+  #     src: conf/
+  #     dest: / 
+  - name: install apache2
+    apt:
+      name:
+        - apache2
+      update_cache: yes
+  - name: change file permissions
+    path: /var/www/html
+    state: directory
+    mode: '0755'
+  - name: copy fichier
+    copy:
+      src: index.html
+      dest: /var/www/html
