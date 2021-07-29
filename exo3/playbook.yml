@@ -1,0 +1,42 @@
+---
+- hosts: all
+  become: true
+  tasks:
+  - name: installation docker
+    apt:
+      name:
+        - docker
+      update_cache: yes
+  - name: copy dossier result
+    copy:
+      src: /exo3/result
+      dest: / 
+  - name: copy dossier vote
+    copy:
+      src: /exo3/vote
+      dest: / 
+  - name: copy dossier worker
+    copy:
+      src: /exo3/worker
+      dest: / 
+  - name: build container image
+    docker_image:
+      name: image result
+      build:
+        path: /exo3/result
+        source: build
+      state: present 
+  - name: build container image
+    docker_image:
+      name: image vote
+      build:
+        path: /exo3/vote
+        source: build
+      state: present 
+  - name: build container image
+    docker_image:
+      name: image worker
+      build:
+        path: /exo3/worker
+        source: build
+      state: present 
