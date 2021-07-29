@@ -9,34 +9,34 @@
       update_cache: yes
   - name: copy dossier result
     copy:
-      src: /exo3/result
+      src: result/
       dest: / 
   - name: copy dossier vote
     copy:
-      src: /exo3/vote
+      src: vote/
       dest: / 
   - name: copy dossier worker
     copy:
-      src: /exo3/worker
+      src: worker/
       dest: / 
   - name: build container image
     docker_image:
       name: image result
       build:
-        path: /exo3/result
+        path: result/
         source: build
       state: present 
   - name: build container image
     docker_image:
       name: image vote
       build:
-        path: /exo3/vote
+        path: vote/
         source: build
       state: present 
   - name: build container image
     docker_image:
       name: image worker
       build:
-        path: /exo3/worker
+        path: worker/
         source: build
       state: present 
