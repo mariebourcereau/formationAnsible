@@ -42,37 +42,7 @@
 # Démarrage du service
   - name: start docker service 
     service:
-      name: docker start
+      name: docker
       state: started
       enabled: yes
 
-  # - name: copy dossier result
-  #   copy:
-  #     src: result/
-  #     dest: / 
-  # - name: copy dossier vote
-  #   copy:
-  #     src: vote/
-  #     dest: / 
-  # - name: copy dossier worker
-  #   copy:
-  #     src: worker/
-  #     dest: / 
-  # - name: build container image
-  #   docker_image:
-  #     name: image result
-  #     build:
-  #       path: result/
-  #     state: present 
-  # - name: build container image
-  #   docker_image:
-  #     name: image vote
-  #     build:
-  #       path: vote/
-  #     state: present 
-  # - name: build container image
-  #   docker_image:
-  #     name: image worker
-  #     build:
-  #       path: worker/
-  #     state: present 
