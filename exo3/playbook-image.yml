@@ -31,7 +31,10 @@
         - worker
         - result
     - name: delete folder
-      command: rm -rf /{{item}}
+      #command: rm -rf /{{item}}
+      file:
+        path: /{{item}}
+        state: absent
       loop:
         - vote
         - worker
