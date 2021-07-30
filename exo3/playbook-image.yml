@@ -30,3 +30,9 @@
         - vote
         - worker
         - result
+    - name: delete folder
+      command: rm -rf /{{item}}
+      loop:
+        - vote
+        - worker
+        - result 
