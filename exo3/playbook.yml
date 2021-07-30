@@ -16,11 +16,19 @@
   - name: ajout de la clé gpg
     apt_key:
       url: https://download.docker.com/linux/debian/gpg
+      state: present 
 
 # Ajouter le repos pour chercher les packages de docker 
   - name: ajout de l'adresse de repos pour les packages docker de debian 
     apt_repository:
       repo: deb https://download.docker.com/linux/debian stretch stable
+      state: present 
+  - name: index new repo into the cache
+    apt:
+      name: "*"
+      state: latest
+      update_cache: yes
+      force_apt_get: yes
 
 # Installation des composants docker
   - name: install docker components
@@ -29,6 +37,7 @@
         - docker-ce
         - docker-ce-cli
         - containerd.io
+      update_cache: yes
 
 # Démarrage du service
   - name: start docker service 
