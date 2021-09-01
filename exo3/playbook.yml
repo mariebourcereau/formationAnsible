@@ -1,8 +1,11 @@
 ---
 - hosts: all
   become: true
+  # vars:
+  #   - mysql_user: "nom utilisateur"
+  vars_files: vars_file.yml
   tasks:
-  - name: installation des packages de docker pour famille debian 
+  - name: installation des packages de docker pour famille {{version}} debian 
     apt:
       name:
         - apt-transport-https
