@@ -1,0 +1,40 @@
+---
+- name: installation des packages de docker pour famille debian 
+  apt:
+    name:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - gnupg
+      - lsb-release
+    update_cache: yes
+  when: ansible_facts['os_family'] == 'Debian'
+
+- name: ajout de la clé gpg
+  apt_key:
+    url: https://download.docker.com/linux/debian/gpg
+    state: present 
+  when: ansible_facts['os_family'] == 'Debian'
+
+- name: ajout de l'adresse de repos pour les packages docker de debian 
+  apt_repository:
+    repo: deb https://download.docker.com/linux/debian stretch stable
+    state: present 
+- name: index new repo into the cache
+  apt:
+    name: "*"
+    state: latest
+    update_cache: yes
+    force_apt_get: yes
+  when: ansible_facts['os_family'] == 'Debian'
+
+- name: install docker components
+  apt:
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+    update_cache: yes
+  notify: start docker service
+  when: ansible_facts['os_family'] == 'Debian'
+
